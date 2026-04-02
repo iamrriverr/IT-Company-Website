@@ -237,13 +237,12 @@
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.002!2d121.5397!3d25.0173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a989d5c38f01%3A0x27b50e0f2bfc5a6a!2z5ZyL56uL6Ie654Gj5aSn5a245Yib5oSP5Ym15qWt5Lit5b-D!5e0!3m2!1szh-TW!2stw" width="100%" height="auto" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
     <div class="contact-form">
-        <form id="contactForm" onsubmit="submitContact(event)">
+        <form action="./contactme.php" method="POST">
             <input type="text" name="name" placeholder="姓名" class="contact-form-txt" required>
-            <input type="tel" id="phone" name="phone" placeholder="聯絡電話" class="contact-form-phone">
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="聯絡電話" maxlength="10" class="contact-form-phone">
             <input type="email" name="email" placeholder="電子郵件" class="contact-form-email" required>
             <textarea placeholder="您的訊息" name="message" class="contact-form-txtarea" required></textarea>
-            <input type="submit" value="送出" name="submit" class="contact-form-btn" id="contactBtn">
-            <p id="contactStatus" style="margin-top: 1rem; font-size: 1.4rem;"></p>
+            <input type="submit" value="送出" name="submit" class="contact-form-btn">
         </form>
     </div>
     </div>
@@ -511,46 +510,6 @@
   </style>
 
   <script>
-    async function submitContact(e) {
-      e.preventDefault();
-      const form = document.getElementById('contactForm');
-      const btn = document.getElementById('contactBtn');
-      const status = document.getElementById('contactStatus');
-
-      btn.disabled = true;
-      btn.value = '傳送中...';
-      status.textContent = '';
-
-      const data = {
-        name: form.name.value,
-        phone: form.phone.value,
-        email: form.email.value,
-        message: form.message.value,
-      };
-
-      try {
-        const res = await fetch('https://chels.jerry921214105033.workers.dev/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        const result = await res.json();
-        if (result.success) {
-          status.style.color = '#2e7d32';
-          status.textContent = '訊息已送出，我們會盡快回覆您！';
-          form.reset();
-        } else {
-          status.style.color = '#a93e41';
-          status.textContent = '送出失敗，請稍後再試或直接來信 river@thepraxisai.com';
-        }
-      } catch (err) {
-        status.style.color = '#a93e41';
-        status.textContent = '送出失敗，請稍後再試或直接來信 river@thepraxisai.com';
-      }
-      btn.disabled = false;
-      btn.value = '送出';
-    }
-
     const chatHistory = [];
 
     function toggleChat() {
