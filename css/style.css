@@ -108,9 +108,14 @@ body{
     background-color: #f5f4f4;
 }
 
+.header .logo{
+    flex-shrink: 0;
+}
+
 .header .logo img{
     height: 4rem;
     width: auto;
+    max-width: 18rem;
     object-fit: contain;
 }
 
@@ -1089,6 +1094,7 @@ body{
     .header .logo img{
         height: 3rem;
         width: auto;
+        max-width: 14rem;
         object-fit: contain;
     }
 
