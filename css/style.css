@@ -1206,6 +1206,16 @@ body{
         min-height: auto;
     }
 
+    .team .team-grid{
+        padding: 0 3%;
+        gap: 2rem;
+    }
+
+    .team .team-grid .card{
+        min-width: 100%;
+        max-width: 100%;
+    }
+
     .team .row{
         flex-direction: column;
     }
