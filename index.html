@@ -409,6 +409,7 @@
       right: 0;
       width: 380px;
       height: 70vh;
+      height: 70dvh;
       max-height: 550px;
       background: #fff;
       border-radius: 12px 12px 0 0;
@@ -509,11 +510,23 @@
     @media (max-width: 768px) {
       #chat-widget {
         width: 100vw;
-        height: 100vh;
-        max-height: 100vh;
+        height: 100%;
+        max-height: none;
+        top: 0;
         right: 0;
         bottom: 0;
+        left: 0;
         border-radius: 0;
+      }
+      #chat-messages {
+        padding: 12px;
+      }
+      .chat-msg {
+        max-width: 90%;
+      }
+      #chat-input-area {
+        padding: 8px;
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
       }
       #chat-toggle {
         bottom: 15px;
@@ -521,12 +534,6 @@
         width: 50px;
         height: 50px;
         font-size: 22px;
-      }
-      #chat-messages {
-        padding: 12px;
-      }
-      .chat-msg {
-        max-width: 90%;
       }
     }
   </style>
@@ -536,7 +543,25 @@
 
     function toggleChat() {
       const w = document.getElementById('chat-widget');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
+      const isOpen = w.style.display !== 'none';
+      w.style.display = isOpen ? 'none' : 'flex';
+      if (!isOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+
+    // 鍵盤彈出時保持輸入框可見
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', function() {
+        const chat = document.getElementById('chat-widget');
+        if (chat && chat.style.display !== 'none') {
+          chat.style.height = window.visualViewport.height + 'px';
+          const msgs = document.getElementById('chat-messages');
+          msgs.scrollTop = msgs.scrollHeight;
+        }
+      });
     }
 
     async function sendChat() {
