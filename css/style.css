@@ -1207,13 +1207,15 @@ body{
     }
 
     .team .team-grid{
-        padding: 0 3%;
+        padding: 0 1rem;
         gap: 2rem;
     }
 
     .team .team-grid .card{
-        min-width: 100%;
-        max-width: 100%;
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+        flex: none;
     }
 
     .team .row{
