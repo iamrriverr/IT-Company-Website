@@ -109,10 +109,9 @@ body{
 }
 
 .header .logo img{
-    width: 130%;
-    height: 3rem;
-    top: 0;
-    left: 0;
+    height: 4rem;
+    width: auto;
+    object-fit: contain;
 }
 
 .header .navbar ul{
@@ -1088,11 +1087,9 @@ body{
     }
 
     .header .logo img{
-        width: 20%;
         height: 3rem;
-        top: 0;
-        left: 0;
-        background-size: cover;
+        width: auto;
+        object-fit: contain;
     }
 
     .header .fa-bars{
